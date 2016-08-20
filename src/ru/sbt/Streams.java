@@ -1,8 +1,10 @@
 package ru.sbt;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -62,6 +64,11 @@ public class Streams {
         Map<String, Double> collect1 = persons.stream()
                 .collect(groupingBy(Person::getLastName, averagingInt(Person::getAge)));
 
+        int[] ints = IntStream.of(1, 243, 423, 423, 423)
+                .filter(n -> n > 23)
+                .map(i -> i + 10)
+                .distinct()
+                .toArray();
         return null;
     }
 }

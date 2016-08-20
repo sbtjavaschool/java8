@@ -5,7 +5,14 @@ import java.util.Map;
 
 // fs is present
 // group student by FS
+
 // most favoriteSubject
+// 1) map student->subject
+// 2) group by subjectName
+// 3) find entry with max value
+// 4) entry::getKey
+
+
 // average mark of each subject
 
 class Class {

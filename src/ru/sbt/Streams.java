@@ -3,6 +3,7 @@ package ru.sbt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,13 +21,19 @@ public class Streams {
         return result;
     }
 
-    public List<String> filterNameJ8(List<Person> persons) {
-        Stream<String> stream = persons.stream()
-                .filter(p -> p.getName().equals("Alex"))
-                .map(Person::getLastName)
-                .filter(s -> s.length() > 18)
-                .sorted(); /*lazy*/
+    public static List<String> filterNameJ8(List<Person> persons, Function<List<Person>, Stream<String>> f) {
+        return f.apply(persons).collect(toList());
+    }
 
-        return stream.collect(toList());
+    public static void main(String[] args) {
+        filterNameJ8(new ArrayList<>(), Streams::getStream);
+    }
+
+    private static Stream<String> getStream(List<Person> persons) {
+        return persons.stream()
+                    .filter(p -> p.getName().equals("Alex"))
+                    .map(Person::getLastName)
+                    .filter(s -> s.length() > 18)
+                    .sorted();
     }
 }

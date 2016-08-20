@@ -2,6 +2,7 @@ package ru.sbt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class PersonFilters {
@@ -53,6 +54,15 @@ public class PersonFilters {
         List<Person> result3 = filterByAge(persons, p -> p.getAge() >= 18);
         List<Person> result4 = filterByAge(persons, p -> p.getName().equals("Alex"));
         List<Person> result5 = filterByAge(persons, p -> p.getName().equals("Alex") && p.getAge() > 18);
+    }
 
+    public static void j8() {
+        List<Person> persons = new ArrayList<>();
+        Function<Integer, Predicate<Person>> olderThan = age -> p -> p.getAge() >= age;
+        Function<String, Predicate<Person>> withName = name -> p -> p.getName().equals(name);
+
+        List<Person> result3 = filterByAge(persons, olderThan.apply(18));
+        List<Person> result4 = filterByAge(persons, withName.apply("Alex"));
+        List<Person> result5 = filterByAge(persons, withName.apply("Bob").or(olderThan.apply(25)));
     }
 }

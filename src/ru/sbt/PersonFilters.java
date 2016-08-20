@@ -61,7 +61,7 @@ public class PersonFilters {
         Function<Integer, Predicate<Person>> olderThan = age -> p -> p.getAge() >= age;
         Function<String, Predicate<Person>> withName = name -> p -> p.getName().equals(name);
 
-        List<Person> result3 = filterByAge(persons, olderThan.apply(18));
+        List<Person> result3 = filterByAge(persons,  olderThan.apply(18));
         List<Person> result4 = filterByAge(persons, withName.apply("Alex"));
         List<Person> result5 = filterByAge(persons, withName.apply("Bob").or(olderThan.apply(25)));
     }
